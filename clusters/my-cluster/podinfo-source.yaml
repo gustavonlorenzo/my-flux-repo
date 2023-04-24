@@ -9,3 +9,5 @@ spec:
   ref:
     branch: main
   url: ssh://github.com/gustavonlorenzo/my-flux-repo
+  secretRef:
+    name: ssh-credentials
