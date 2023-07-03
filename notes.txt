@@ -6,3 +6,12 @@ flux bootstrap github --owner=gustavonlorenzo --repository=my-flux-repo --path=c
 
 ^^ Also useful for changing up the main branch of your repo.
 
+
+https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+
+Pod was getting authorization errors when pulling image. followed above url which boiled down to:
+
+1. manually login to registry to get a ~/.docker/config.json file.
+2. create a k8s secret using the encoded auth secret in that file.
+3. set up deployment.yml to use the imagePullSecrets.
+4. Flux is happy.
