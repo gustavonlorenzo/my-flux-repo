@@ -50,7 +50,6 @@ spec:
         stage('Echo') {
             steps {
                 git credentialsId: "github", url: "git@github.com:gustavonlorenzo/my-flux-repo.git"
-                sh 'ls -la ../'
             }
         }
         stage('Test') {
