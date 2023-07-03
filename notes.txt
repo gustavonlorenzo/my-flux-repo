@@ -1,0 +1,8 @@
+FLUX:
+
+Bootstrap a repo: 
+
+flux bootstrap github --owner=gustavonlorenzo --repository=my-flux-repo --path=clusters/my-cluster --branch=master --personal
+
+^^ Also useful for changing up the main branch of your repo.
+
