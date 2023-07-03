@@ -1,0 +1,89 @@
+// Uses Declarative syntax to run commands inside a container.
+pipeline {
+    agent {
+        kubernetes {
+            // Rather than inline YAML, in a multibranch Pipeline you could use: yamlFile 'jenkins-pod.yaml'
+            // Or, to avoid YAML:
+            // containerTemplate {
+            //     name 'shell'
+            //     image 'ubuntu'
+            //     command 'sleep'
+            //     args 'infinity'
+            // }
+            yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: docker
+    image: docker:24.0.2-dind
+    securityContext: 
+        privileged: true
+    volumeMounts:
+    - mountPath: /data
+      name: app-data
+  - name: python
+    image: python:latest
+    securityContext: 
+        privileged: true
+    volumeMounts:
+    - mountPath: /data
+      name: app-data
+    command:
+    - sleep
+    args:
+    - infinity
+  volumes:
+  - name: app-data
+    hostPath:
+      path: /data/jenkins-agent
+      type: Directory
+'''
+            // Can also wrap individual steps:
+            // container('shell') {
+            //     sh 'hostname'
+            // }
+            //defaultContainer 'python'
+        }
+    }
+    stages {
+        stage('Echo') {
+            steps {
+                git credentialsId: "github", url: "git@github.com:gustavonlorenzo/my-flux-repo.git"
+                sh 'ls -la ../'
+            }
+        }
+        stage('Push') {
+            steps {
+                    // Add the file to the Git repository
+                    sh 'git add ./my-flux-repo/clusters/my-cluster/default/deployment.yaml'
+                    
+                    // Commit the changes
+                    sh 'git commit -m "Add deployment.yml"'
+                    
+                    // Push the changes to the remote repository
+                    sh 'git push'
+            }
+        }
+        stage('Test') {
+            steps {
+                container('python') {
+                    sh './pytest.py'
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                container('docker') {
+                    sh 'docker build -t test:1.0 .'
+                    withCredentials([string(credentialsId: 'ghcr-io', variable: 'CR_PAT')]) {
+                        sh "echo ${CR_PAT} | docker login ghcr.io -u gustavonlorenzo@gmail.com --password-stdin"
+                        sh 'docker tag test:1.0 ghcr.io/gustavonlorenzo/test:1.0'
+                        sh 'docker image push ghcr.io/gustavonlorenzo/test:1.0'
+                    }
+                }
+            }
+        }
+    }
+}
+

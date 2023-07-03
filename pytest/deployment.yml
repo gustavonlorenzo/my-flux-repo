@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pytest
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: pytest
+  template:
+    metadata:
+      labels:
+        app: pytest
+    spec:
+      containers:
+      - name: pytest
+        image: pytest
