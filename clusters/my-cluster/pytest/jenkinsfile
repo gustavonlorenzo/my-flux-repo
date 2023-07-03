@@ -62,7 +62,6 @@ spec:
         stage('Build') {
             steps {
                 container('docker') {
-                    sh 'ls -la'
                     sh 'docker build -t test:1.0 .'
                     withCredentials([string(credentialsId: 'ghcr-io', variable: 'CR_PAT')]) {
                         sh "echo ${CR_PAT} | docker login ghcr.io -u gustavonlorenzo@gmail.com --password-stdin"
