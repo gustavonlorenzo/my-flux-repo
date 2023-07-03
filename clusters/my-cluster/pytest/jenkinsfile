@@ -65,8 +65,8 @@ spec:
                     sh 'docker build -t test:1.1 .'
                     withCredentials([string(credentialsId: 'ghcr-io', variable: 'CR_PAT')]) {
                         sh "echo ${CR_PAT} | docker login ghcr.io -u gustavonlorenzo@gmail.com --password-stdin"
-                        sh 'docker tag test:1.0 ghcr.io/gustavonlorenzo/test:1.0'
-                        sh 'docker image push ghcr.io/gustavonlorenzo/test:1.0'
+                        sh 'docker tag test:1.1 ghcr.io/gustavonlorenzo/test:1.1'
+                        sh 'docker image push ghcr.io/gustavonlorenzo/test:1.1'
                     }
                 }
             }
