@@ -1,8 +1,8 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageRepository
 metadata:
-  name: pytest
+  name: redis
   namespace: flux-system
 spec:
-  image: ghcr.io/gustavonlorenzo/test
+  image: redis
   interval: 1m0s
