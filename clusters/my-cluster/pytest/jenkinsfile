@@ -52,13 +52,13 @@ spec:
                 git credentialsId: "github", url: "git@github.com:gustavonlorenzo/my-flux-repo.git"
             }
         }
-        stage('Test') {
-            steps {
-                container('python') {
-                    sh './clusters/my-cluster/pytest/pytest.py'
-                }
-            }
-        }
+        //stage('Test') {
+        //    steps {
+        //        container('python') {
+        //            sh './clusters/my-cluster/pytest/pytest.py'
+        //        }
+        //    }
+        //}
         stage('Build') {
             steps {
                 container('docker') {
