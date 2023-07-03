@@ -53,18 +53,6 @@ spec:
                 sh 'ls -la ../'
             }
         }
-        stage('Push') {
-            steps {
-                    // Add the file to the Git repository
-                    sh 'git add ./my-flux-repo/clusters/my-cluster/default/deployment.yaml'
-                    
-                    // Commit the changes
-                    sh 'git commit -m "Add deployment.yml"'
-                    
-                    // Push the changes to the remote repository
-                    sh 'git push'
-            }
-        }
         stage('Test') {
             steps {
                 container('python') {
