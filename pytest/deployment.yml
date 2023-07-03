@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
       - name: pytest
-        image: pytest
+        image: ghcr.io/gustavonlorenzo/test:1.0
