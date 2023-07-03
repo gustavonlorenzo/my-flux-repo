@@ -16,5 +16,7 @@ spec:
       containers:
       - name: pytest
         image: ghcr.io/gustavonlorenzo/test:1.0
+        ports:
+        - containerPort: 8080
       imagePullSecrets:
       - name: ghcr-secret
