@@ -1,5 +1,5 @@
 FROM python:latest
 
-COPY pytest.py /
+COPY ./pytest/pytest.py /
 
 RUN /pytest.py
