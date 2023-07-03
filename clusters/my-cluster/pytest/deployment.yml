@@ -5,8 +5,6 @@ metadata:
   namespace: default
 spec:
   replicas: 2
-  imagePullSecrets:
-  - name: ghcr-secret
   selector:
     matchLabels:
       app: pytest
@@ -18,3 +16,5 @@ spec:
       containers:
       - name: pytest
         image: ghcr.io/gustavonlorenzo/test:1.0
+      imagePullSecrets:
+      - name: ghcr-secret
