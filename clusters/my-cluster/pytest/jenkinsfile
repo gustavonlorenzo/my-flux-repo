@@ -54,7 +54,7 @@ spec:
                     def commit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
                     def tag = sh(returnStdout: true, script: "git describe --tags --exact-match ${commit} 2> /dev/null || echo ''").trim()
                     
-                    sh 'echo ${tag} > tag.txt'
+                    sh "echo ${tag} > tag.txt"
                 }
             }
         }
