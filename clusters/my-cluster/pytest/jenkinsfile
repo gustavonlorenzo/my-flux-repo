@@ -69,6 +69,13 @@ spec:
         }
         stage('Build') {
             steps {
+                script {
+                    def commit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+                    def tag = sh(returnStdout: true, script: "git describe --tags --exact-match ${commit} 2> /dev/null || echo ''").trim()
+                    
+                    echo "Commit: ${commit}"
+                    echo "Tag: ${tag}"
+                }
                 container('docker') {
                     sh "docker build -t test:${tag} ."
                     withCredentials([string(credentialsId: 'ghcr-io', variable: 'CR_PAT')]) {
