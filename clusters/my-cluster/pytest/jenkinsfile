@@ -55,6 +55,7 @@ spec:
         stage('Test') {
             steps {
                 container('python') {
+                    sh 'pip3 install pylint -y'
                     sh 'pylint -E ./clusters/my-cluster/pytest/pytest.py'
                 }
             }
