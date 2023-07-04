@@ -50,6 +50,11 @@ spec:
         stage('Echo') {
             steps {
                 git credentialsId: "github", url: "git@github.com:gustavonlorenzo/my-flux-repo.git"
+                def commit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+                def tag = sh(returnStdout: true, script: "git describe --tags --exact-match ${commit} 2> /dev/null || echo ''").trim()
+                    
+                echo "Commit: ${commit}"
+                echo "Tag: ${tag}"
             }
         }
         stage('Test') {
