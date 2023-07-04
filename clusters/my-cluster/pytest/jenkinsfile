@@ -70,11 +70,11 @@ spec:
         stage('Build') {
             steps {
                 container('docker') {
-                    sh "docker build -t test:${GIT_COMMIT_TAG} ."
+                    sh "docker build -t test:${tag} ."
                     withCredentials([string(credentialsId: 'ghcr-io', variable: 'CR_PAT')]) {
                         sh "echo ${CR_PAT} | docker login ghcr.io -u gustavonlorenzo@gmail.com --password-stdin"
-                        sh "docker tag test:${GIT_COMMIT_TAG} ghcr.io/gustavonlorenzo/test:${GIT_COMMIT_TAG}"
-                        sh "docker image push ghcr.io/gustavonlorenzo/test:${GIT_COMMIT_TAG}"
+                        sh "docker tag test:${tag} ghcr.io/gustavonlorenzo/test:${tag}"
+                        sh "docker image push ghcr.io/gustavonlorenzo/test:${tag}"
                     }
                 }
             }
