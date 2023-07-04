@@ -54,8 +54,9 @@ spec:
                     def commit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
                     def tag = sh(returnStdout: true, script: "git describe --tags --exact-match ${commit} 2> /dev/null || echo ''").trim()
                     
-                    echo "Commit: ${commit}"
-                    echo "Tag: ${tag}"
+                    environment {
+                        TAG = tag
+                    }
                 }
             }
         }
@@ -70,18 +71,11 @@ spec:
         stage('Build') {
             steps {
                 container('docker') {
-                    script {
-                        def commit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
-                        def tag = sh(returnStdout: true, script: "git describe --tags --exact-match ${commit} 2> /dev/null || echo ''").trim()
-                    
-                        echo "Commit: ${commit}"
-                        echo "Tag: ${tag}"
-                    }
-                    sh "docker build -t test:${tag} ."
+                    sh "docker build -t test:${TAG} ."
                     withCredentials([string(credentialsId: 'ghcr-io', variable: 'CR_PAT')]) {
                         sh "echo ${CR_PAT} | docker login ghcr.io -u gustavonlorenzo@gmail.com --password-stdin"
-                        sh "docker tag test:${tag} ghcr.io/gustavonlorenzo/test:${tag}"
-                        sh "docker image push ghcr.io/gustavonlorenzo/test:${tag}"
+                        sh "docker tag test:${TAG} ghcr.io/gustavonlorenzo/test:${TAG}"
+                        sh "docker image push ghcr.io/gustavonlorenzo/test:${TAG}"
                     }
                 }
             }
