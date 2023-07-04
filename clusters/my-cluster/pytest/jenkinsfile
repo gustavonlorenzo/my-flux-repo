@@ -55,7 +55,7 @@ spec:
         stage('Test') {
             steps {
                 container('python') {
-                    sh 'pytest -E ./clusters/my-cluster/pytest/pytest.py'
+                    sh 'pylint -E ./clusters/my-cluster/pytest/pytest.py'
                 }
             }
         }
