@@ -68,7 +68,7 @@ spec:
         }
         stage('Build') {
             steps {
-                echo "${env.getEnvironment()}"
+                echo "${tag}"
                 container('docker') {
                     //'export TAG=$(cat tag.txt)'
                     //sh 'docker build -t test:$TAG .'
