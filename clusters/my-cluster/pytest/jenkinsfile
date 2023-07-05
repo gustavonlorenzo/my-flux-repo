@@ -70,7 +70,7 @@ spec:
             steps {
                 container('docker') {
                     sh 'export TAG=$(cat tag.txt)'
-                    sh 'echo $TAG'
+                    sh "echo $TAG"
                     //sh 'docker build -t test:$TAG .'
                     //withCredentials([string(credentialsId: 'ghcr-io', variable: 'CR_PAT')]) {
                     //    sh "echo ${CR_PAT} | docker login ghcr.io -u gustavonlorenzo@gmail.com --password-stdin"
