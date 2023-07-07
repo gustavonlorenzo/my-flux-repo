@@ -1,0 +1,16 @@
+name: Hello World Pipeline
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Echo Hello World
+        run: echo "Hello, World!"
