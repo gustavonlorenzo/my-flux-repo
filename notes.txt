@@ -15,3 +15,6 @@ Pod was getting authorization errors when pulling image. followed above url whic
 2. create a k8s secret using the encoded auth secret in that file.
 3. set up deployment.yml to use the imagePullSecrets.
 4. Flux is happy.
+
+
+TEST
