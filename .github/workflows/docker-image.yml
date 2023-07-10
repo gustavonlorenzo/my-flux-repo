@@ -5,6 +5,8 @@ on:
 jobs:
   build_image:
     runs-on: self-hosted
+    permissions:
+      contents: write 
     steps:
       - uses: actions/checkout@v3
         with:
@@ -23,8 +25,6 @@ jobs:
         run: ./update-release.sh $RELEASE_VERSION
       - name: commit new manifest
         uses: stefanzweifel/git-auto-commit-action@v4
-        permissions:
-          contents: write
 ##
 ##### For later review
 ##
