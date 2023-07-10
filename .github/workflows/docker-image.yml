@@ -1,39 +1,20 @@
-#name: Docker Image CI
-#
-#on:
-#  push:
-#    branches: [ "master" ]
-#  pull_request:
-#    branches: [ "master" ]
-#
-#jobs:
-#
-#  build:
-#
-#    runs-on: self-hosted
-#
-#    steps:
-#    - uses: actions/checkout@v3
-#    - name: Build the Docker image
-#      run: sudo docker build . --file dockerfile --tag pytest:$(date +%s)
-#
-
 on:
   push:
     tags:
       - 'v*.*.*'
 jobs:
-  test:
+  build_image:
     runs-on: self-hosted
     steps:
-
       - uses: actions/checkout@v2
       - name: Set env
         run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-      - name: Test
+      - name: build_push
         env:
           GHCR_PAT: ${{ secrets.GHCR_PAT }}
         run: |
           sudo docker build --file dockerfile --tag pytest:$RELEASE_VERSION .
           echo $GHCR_PAT | sudo docker login ghcr.io -u gustavonlorenzo@gmail.com --password-stdin
+          sudo docker tag test:$RELEASE_VERSION ghcr.io/gustavonlorenzo/test:$RELEASE_VERSION
+          sudo docker image push ghcr.io/gustavonlorenzo/test:$RELEASE_VERSION
 
