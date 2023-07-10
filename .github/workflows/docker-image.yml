@@ -35,5 +35,5 @@ jobs:
           GHCR_PAT: ${{ secrets.GHCR_PAT }}
         run: |
           sudo docker build --file dockerfile --tag pytest:$RELEASE_VERSION .
-          echo $GHCR_PAT | docker login ghcr.io -u gustavonlorenzo@gmail.com --password-stdin
+          echo $GHCR_PAT | sudo docker login ghcr.io -u gustavonlorenzo@gmail.com --password-stdin
 
