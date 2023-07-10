@@ -19,6 +19,8 @@ jobs:
           sudo docker image push ghcr.io/gustavonlorenzo/pytest:$RELEASE_VERSION
       - name: update manifest
         run: ./update-release.sh $RELEASE_VERSION
+      - name: commit new manifest
+        uses: stefanzweifel/git-auto-commit-action@v4
 ##
 ##### For later review
 ##
