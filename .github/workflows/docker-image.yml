@@ -15,6 +15,6 @@ jobs:
         run: |
           sudo docker build --file dockerfile --tag pytest:$RELEASE_VERSION .
           echo $GHCR_PAT | sudo docker login ghcr.io -u gustavonlorenzo@gmail.com --password-stdin
-          sudo docker tag test:$RELEASE_VERSION ghcr.io/gustavonlorenzo/test:$RELEASE_VERSION
-          sudo docker image push ghcr.io/gustavonlorenzo/test:$RELEASE_VERSION
+          sudo docker tag pytest:$RELEASE_VERSION ghcr.io/gustavonlorenzo/pytest:$RELEASE_VERSION
+          sudo docker image push ghcr.io/gustavonlorenzo/pytest:$RELEASE_VERSION
 
