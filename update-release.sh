@@ -9,5 +9,3 @@ sed -i "s|image: ghcr.io/gustavonlorenzo/pytest:.*|image: ghcr.io/gustavonlorenz
 
 cat /opt/actions-runner/_work/my-flux-repo/my-flux-repo/clusters/my-cluster/pytest/deployment.yml
 
-git add /opt/actions-runner/_work/my-flux-repo/my-flux-repo/clusters/my-cluster/pytest/deployment.yml
-
