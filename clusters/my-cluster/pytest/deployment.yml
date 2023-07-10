@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: pytest
-        image: ghcr.io/gustavonlorenzo/test:1.2
+        image: ghcr.io/gustavonlorenzo/pytest:1.2
         ports:
         - containerPort: 8080
       imagePullSecrets:

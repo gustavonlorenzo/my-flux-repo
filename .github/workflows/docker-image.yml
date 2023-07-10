@@ -17,6 +17,8 @@ jobs:
           echo $GHCR_PAT | sudo docker login ghcr.io -u gustavonlorenzo@gmail.com --password-stdin
           sudo docker tag pytest:$RELEASE_VERSION ghcr.io/gustavonlorenzo/pytest:$RELEASE_VERSION
           sudo docker image push ghcr.io/gustavonlorenzo/pytest:$RELEASE_VERSION
+      - name: update manifest
+        run: update-release.sh $RELEASE_VERSION
 ##
 ##### For later review
 ##
