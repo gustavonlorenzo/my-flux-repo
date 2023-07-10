@@ -26,10 +26,14 @@ jobs:
   test:
     runs-on: self-hosted
     steps:
+
       - uses: actions/checkout@v2
       - name: Set env
         run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: Test
+        env:
+          GHCR_PAT: ${{ secrets.GHCR_PAT }}
         run: |
           sudo docker build --file dockerfile --tag pytest:$RELEASE_VERSION .
+          echo $GHCR_PAT | docker login ghcr.io -u gustavonlorenzo@gmail.com --password-stdin"
 
