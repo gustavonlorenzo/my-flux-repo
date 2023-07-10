@@ -22,3 +22,4 @@ Pod was getting authorization errors when pulling image. followed above url whic
 Github actions:
 
 Had to update to >=2.18 to get the auto-commit working properly.
+And add contents: write permissions
