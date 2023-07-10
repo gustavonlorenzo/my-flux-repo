@@ -9,5 +9,5 @@ sed -i "s|image: ghcr.io/gustavonlorenzo/pytest:.*|image: ghcr.io/gustavonlorenz
 
 cat ./clusters/my-cluster/pytest/deployment.yml
 
-git add .
+git add ./clusters/my-cluster/pytest/deployment.yml
 
