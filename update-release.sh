@@ -7,3 +7,5 @@ RELEASE_VERSION=$RELEASE_VERSION
 echo $RELEASE_VERSION
 sed -i "s|image: ghcr.io/gustavonlorenzo/pytest:.*|image: ghcr.io/gustavonlorenzo/pytest:$RELEASE_VERSION|" ./clusters/my-cluster/pytest/deployment.yml
 
+cat ./clusters/my-cluster/pytest/deployment.yml
+
