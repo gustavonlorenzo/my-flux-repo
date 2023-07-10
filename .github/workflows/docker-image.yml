@@ -18,7 +18,7 @@ jobs:
           sudo docker tag pytest:$RELEASE_VERSION ghcr.io/gustavonlorenzo/pytest:$RELEASE_VERSION
           sudo docker image push ghcr.io/gustavonlorenzo/pytest:$RELEASE_VERSION
       - name: update manifest
-        run: update-release.sh $RELEASE_VERSION
+        run: ./update-release.sh $RELEASE_VERSION
 ##
 ##### For later review
 ##
