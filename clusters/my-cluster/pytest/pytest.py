@@ -13,7 +13,7 @@ class MyRequestHandler(http.server.SimpleHTTPRequestHandler):
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
         self.end_headers()
-        self.wfile.write(b'Hello, World! v1.21.0')
+        self.wfile.write(b'Hello, World! v1.22.0')
 
 # Create a socket server and bind it to the specified port
 with socketserver.TCPServer(("", PORT), MyRequestHandler) as httpd:
