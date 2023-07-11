@@ -45,6 +45,8 @@ jobs:
       
       - name: commit new manifest
         uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: master
 ##
 ##### For later review
 ##
